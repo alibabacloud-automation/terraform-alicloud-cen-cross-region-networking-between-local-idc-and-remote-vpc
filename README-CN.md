@@ -3,23 +3,19 @@ Terraform module to build cross-region network communication between different r
 terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc
 ======================================
 
+[English](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/blob/main/README.md) | 简体中文
 
-English | [简体中文](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/blob/main/README-CN.md)
+本模块重点介绍私有网络VPC实例/专线VBR实例被连接至转发路由器后，可以在转发路由器下创建跨地域连接，并为跨地域连接分配带宽，从而实现云上云下不同地域间的跨地域互通网络。整体方案如下：
+- IDC上云专线接入：通过上云专线打通IDC与阿里云杭州。企业IDC与阿里云专线Pop点考虑到冗余性，建议优先考虑双物理专线，并可以按需配置为双链路主备或负载冗余的方式，提升混合云互通时的整体可靠性。
+- 云上跨地域：通过TR构建阿里云北京-杭州跨地域连接，同时开通CDT跨域带宽按流量计费，打通北京VPC与杭州IDC。
 
+架构图:
 
-This module focuses on instances of private network VPCs and dedicated line VBRs connected to a forwarding router, allowing for the creation of cross-region connections under the forwarding router and the allocation of bandwidth for these connections. This enables cross-region network communication between different regions in the cloud and on-premises. The overall solution is as follows:
-- Dedicated Line Access for IDC to Cloud: Connect the IDC (Internet Data Center) to Alibaba Cloud in Hangzhou via dedicated lines. To enhance redundancy, it is recommended to prioritize dual physical dedicated lines for the enterprise IDC and Alibaba Cloud POP point, and configure them as needed for either active-passive dual links or load-balanced redundancy, thereby improving the overall reliability of hybrid cloud connectivity.
-- Cross-Region on Cloud: Establish a cross-region connection between Alibaba Cloud Shanghai and Hangzhou through a TR (TransRegional) connection. Additionally, activate the CDT (Cross-Domain Traffic) bandwidth billed on a per-traffic basis to connect the Shanghai VPC with the Hangzhou IDC.
+<img src="https://raw.githubusercontent.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/main/scripts/diagram-CN.png" alt="Architecture Diagram" width="600" height="200">
 
+## 用法
 
-Architecture Diagram:
-
-<img src="https://raw.githubusercontent.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/main/scripts/diagram.png" alt="Architecture Diagram" width="600" height="200">
-
-
-## Usage
-
-create VPC in cn-beijing and VPC, VBRs in cn-hangzhou.
+在北京区域创建 VPC, 在杭州区域创建 VPC 和 VBR。
 
 ```hcl
 provider "alicloud" {
@@ -106,9 +102,9 @@ module "complete" {
 ```
 
 
-## Examples
+## 示例
 
-* [Complete Example](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/tree/main/examples/complete)
+* [完整示例](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/tree/main/examples/complete)
 
 
 <!-- BEGIN_TF_DOCS -->
@@ -186,22 +182,21 @@ module "complete" {
 | <a name="output_tr_peer_attachment_id"></a> [tr\_peer\_attachment\_id](#output\_tr\_peer\_attachment\_id) | The id of attachment between local TR and remote TR. |
 <!-- END_TF_DOCS -->
 
-## Submit Issues
+## 提交问题
 
-If you have any problems when using this module, please opening
-a [provider issue](https://github.com/aliyun/terraform-provider-alicloud/issues/new) and let us know.
+如果在使用该 Terraform Module 的过程中有任何问题，可以直接创建一个 [Provider Issue](https://github.com/aliyun/terraform-provider-alicloud/issues/new)，我们将根据问题描述提供解决方案。
 
-**Note:** There does not recommend opening an issue on this repo.
+**注意:** 不建议在该 Module 仓库中直接提交 Issue。
 
-## Authors
+## 作者
 
 Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com).
 
-## License
+## 许可
 
 MIT Licensed. See LICENSE for full details.
 
-## Reference
+## 参考
 
 * [Terraform-Provider-Alicloud Github](https://github.com/aliyun/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)
