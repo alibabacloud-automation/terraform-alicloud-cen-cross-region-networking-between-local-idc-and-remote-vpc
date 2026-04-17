@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/compare/v2.0.0...v2.0.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* fix the submodule version constraint ([0f432dc](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/commit/0f432dc29f454ded4189b20c0c8560e897b7b625))
+
 ## [2.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-cen-cross-region-networking-between-local-idc-and-remote-vpc/compare/v1.0.1...v2.0.0) (2026-04-17)
 
 
