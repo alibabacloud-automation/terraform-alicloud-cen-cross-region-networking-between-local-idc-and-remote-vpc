@@ -1,7 +1,5 @@
 
-/*
- * vbr
- */
+# VBR
 resource "alicloud_express_connect_virtual_border_router" "this" {
   physical_connection_id     = var.vbr.physical_connection_id
   vlan_id                    = var.vbr.vlan_id
@@ -37,9 +35,7 @@ resource "alicloud_cen_transit_router_route_table_association" "this" {
 }
 
 
-/*
- * vbr_health_check
- */
+# VBR health check
 data "alicloud_regions" "this" {
   current = true
 }
@@ -54,9 +50,7 @@ resource "alicloud_cen_vbr_health_check" "this" {
 
 }
 
-/*
- * bgp_group & bgp_peer
- */
+# BGP group and peer
 resource "alicloud_vpc_bgp_group" "this" {
   router_id      = alicloud_express_connect_virtual_border_router.this.id
   auth_key       = var.vbr_bgp_group.auth_key

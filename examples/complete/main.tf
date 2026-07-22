@@ -13,6 +13,21 @@ data "alicloud_express_connect_physical_connections" "example" {
   name_regex = "^preserved-NODELETING"
 }
 
+resource "alicloud_cen_bandwidth_package" "example" {
+  provider                   = alicloud.local_region
+  bandwidth                  = 5
+  cen_bandwidth_package_name = "tf-cen-cross-region"
+  geographic_region_a_id     = "China"
+  geographic_region_b_id     = "China"
+  payment_type               = "PostPaid"
+}
+
+resource "alicloud_cen_bandwidth_package_attachment" "example" {
+  provider             = alicloud.local_region
+  instance_id          = module.complete.cen_instance_id
+  bandwidth_package_id = alicloud_cen_bandwidth_package.example.id
+}
+
 module "complete" {
   source = "../.."
   providers = {
@@ -57,4 +72,9 @@ module "complete" {
 
   remote_vpc_config = var.remote_vpc_config
 
+  tr_peer_attachment = {
+    bandwidth_type           = "BandwidthPackage"
+    bandwidth                = 5
+    cen_bandwidth_package_id = alicloud_cen_bandwidth_package_attachment.example.bandwidth_package_id
+  }
 }

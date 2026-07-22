@@ -1,6 +1,4 @@
-/*
- * vpc
- */
+# VPC
 resource "alicloud_vpc" "this" {
   cidr_block  = var.vpc.cidr_block
   vpc_name    = var.vpc.vpc_name
@@ -46,4 +44,3 @@ resource "alicloud_cen_transit_router_route_table_association" "this" {
   transit_router_route_table_id = var.cen_transit_router_route_table_id
   transit_router_attachment_id  = alicloud_cen_transit_router_vpc_attachment.this.transit_router_attachment_id
 }
-
